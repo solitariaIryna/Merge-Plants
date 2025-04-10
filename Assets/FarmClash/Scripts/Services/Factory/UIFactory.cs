@@ -1,8 +1,8 @@
-﻿using FarmClash.UI;
-using FarnClash.Services.AssetProvider;
+﻿using MergePlants.UI;
+using MergePlants.Services.AssetProvider;
 using UnityEngine;
 
-namespace FarmClash.Services.Factory
+namespace MergePlants.Services.Factory
 {
     public class UIFactory : IUIFactory
     {

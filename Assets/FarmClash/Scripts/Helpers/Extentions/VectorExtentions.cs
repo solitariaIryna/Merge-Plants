@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using Random = UnityEngine.Random;
-namespace FarmClash.Helpers.Extentions
+namespace MergePlants.Helpers.Extentions
 {
     public static class VectorExtentions
     {

@@ -2,13 +2,8 @@
 using UnityEngine;
 using Zenject;
 
-namespace FarnClash.Services.AssetProvider
+namespace MergePlants.Services.AssetProvider
 {
-    public class AssetPath
-    {
-        public const string HeroPath = "Gameplay/Entities/Hero/Hero";
-        public const string AnimalPath = "Gameplay/Entities/Animal/Animal";
-    }
     public interface IAssetProvider
     {
         TAsset Load<TAsset>(string path) where TAsset : Object;

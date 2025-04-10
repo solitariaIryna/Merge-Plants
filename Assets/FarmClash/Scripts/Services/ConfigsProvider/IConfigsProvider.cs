@@ -1,8 +1,13 @@
 ﻿
-namespace FarnClash.Services.ConfigsProvider
+using Cysharp.Threading.Tasks;
+using FarmClash.Configs;
+
+namespace MergePlants.Services.ConfigsProvider
 {
     public interface IConfigsProvider
     {
-        void LoadAll();
+        GameConfig GameConfig { get; }
+
+        UniTask LoadAll();
     }
 }

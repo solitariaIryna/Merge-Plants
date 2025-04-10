@@ -1,10 +1,9 @@
-﻿using FarmClash.Services.AssetProvider;
-using FarmClash.Services.Factory;
-using FarmClash.UI;
+﻿using MergePlants.Services.Factory;
+using MergePlants.UI;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FarmClash.Services.Window
+namespace MergePlants.Services.Window
 {
     public class WindowService : IWindowService
     {
@@ -19,7 +18,7 @@ namespace FarmClash.Services.Window
 
             _windowPaths = new Dictionary<WindowType, string>()
             {
-                { WindowType.PickAnimal, AssetPath.PickAnimalUI },
+                
 
             };
         }

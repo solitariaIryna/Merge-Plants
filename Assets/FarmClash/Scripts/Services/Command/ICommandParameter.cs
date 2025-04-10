@@ -1,5 +1,5 @@
 ﻿
-namespace FarmClash.Services.Command
+namespace MergePlants.Services.Command
 {
     public interface ICommandParameter
     {

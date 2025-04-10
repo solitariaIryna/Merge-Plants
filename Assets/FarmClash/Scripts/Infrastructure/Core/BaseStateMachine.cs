@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 
-namespace FarnClash.Infrastructure.StateMachine
+namespace MergePlants.Infrastructure.StateMachine
 {
     public abstract class BaseStateMachine
     {
@@ -10,16 +11,16 @@ namespace FarnClash.Infrastructure.StateMachine
 
         public virtual void Initialize() { }
 
-        public void Enter<TState>() where TState : class, IState
+        public async UniTask EnterAsync<TState>() where TState : class, IState
         {
             IState state = ChangeState<TState>();
-            state.Enter();
+            await state.EnterAsync();
         }
 
-        public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadState<TPayload>
+        public async UniTask EnterAsync<TState, TPayload>(TPayload payload) where TState : class, IPayloadState<TPayload>
         {
             TState state = ChangeState<TState>();
-            state.Enter(payload);
+            await state.EnterAsync(payload);
         }
 
         private TState ChangeState<TState>() where TState : class, IExitableState

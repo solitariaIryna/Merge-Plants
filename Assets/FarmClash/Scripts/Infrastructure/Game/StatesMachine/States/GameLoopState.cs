@@ -1,6 +1,7 @@
-﻿using FarnClash.Infrastructure.StateMachine;
+﻿using Cysharp.Threading.Tasks;
+using MergePlants.Infrastructure.StateMachine;
 
-namespace FarnClash.Infrastructure.Gameplay.StatesMachine
+namespace MergePlants.Infrastructure.Gameplay.StatesMachine
 {
     public class GameLoopState : IState
     {
@@ -9,13 +10,14 @@ namespace FarnClash.Infrastructure.Gameplay.StatesMachine
 
         }
 
-        public void Enter()
+        public async UniTask EnterAsync()
         {
-
+            
         }
 
         public void Exit()
         {
+
         }
     }
 }

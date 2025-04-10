@@ -1,9 +1,10 @@
-﻿using FarnClash.Infrastructure.StateMachine;
+﻿using MergePlants.Infrastructure.Gameplay.StatesMachine;
+using MergePlants.Infrastructure.StateMachine;
 using System;
 using System.Collections.Generic;
 using Zenject;
 
-namespace FarnClash.Infrastructure.Application.StatesMachine
+namespace MergePlants.Infrastructure.App.StatesMachine
 {
     public class ApplicationStatesFactory
     {
@@ -18,6 +19,7 @@ namespace FarnClash.Infrastructure.Application.StatesMachine
         {
             { typeof(StartupApplicationState), _container.Instantiate<StartupApplicationState>() },
             { typeof(LoadingSceneApplicationState), _container.Instantiate<LoadingSceneApplicationState>() },
+            { typeof(LoadProgressApplicationState), _container.Instantiate<LoadProgressApplicationState>() },
             { typeof(GameApplicationState), _container.Instantiate<GameApplicationState>() }
         };
     }

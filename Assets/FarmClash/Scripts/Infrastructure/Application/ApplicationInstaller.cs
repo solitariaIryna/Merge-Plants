@@ -1,11 +1,12 @@
-﻿using FarmClash.Services.Factory;
-using FarmClash.Services.Window;
-using FarnClash.Infrastructure.Application.StatesMachine;
-using FarnClash.Services.AssetProvider;
-using FarnClash.Services.ConfigsProvider;
+﻿using MergePlants.Services.Factory;
+using MergePlants.Services.Window;
+using MergePlants.Infrastructure.App.StatesMachine;
+using MergePlants.Services.AssetProvider;
+using MergePlants.Services.ConfigsProvider;
 using Zenject;
+using MergePlants.Services.SaveLoad;
 
-namespace FarnClash.Infrastructure.Application
+namespace MergePlants.Infrastructure.App
 {
     public class ApplicationInstaller : MonoInstaller
     {
@@ -17,6 +18,11 @@ namespace FarnClash.Infrastructure.Application
 
             Container
                 .BindInterfacesAndSelfTo<ApplicationStateMachine>()
+                .AsSingle();
+
+            Container
+                .Bind<ISaveLoadService>()
+                .To<PlayerPrefsSaveLoadService>()
                 .AsSingle();
 
             Container

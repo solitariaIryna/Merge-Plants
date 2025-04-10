@@ -1,6 +1,6 @@
 ﻿using Zenject;
 
-namespace FarnClash.Infrastructure
+namespace MergePlants.Infrastructure
 {
     public class GameRunner : MonoInstaller
     {

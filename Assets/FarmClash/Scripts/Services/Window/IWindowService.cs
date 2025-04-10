@@ -1,6 +1,6 @@
-﻿using FarmClash.UI;
+﻿using MergePlants.UI;
 
-namespace FarmClash.Services.Window
+namespace MergePlants.Services.Window
 {
     public interface IWindowService
     {

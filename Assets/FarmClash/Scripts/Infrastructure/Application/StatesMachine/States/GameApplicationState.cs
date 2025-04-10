@@ -1,6 +1,7 @@
-﻿using FarnClash.Infrastructure.StateMachine;
+﻿using Cysharp.Threading.Tasks;
+using MergePlants.Infrastructure.StateMachine;
 
-namespace FarnClash.Infrastructure.Application.StatesMachine
+namespace MergePlants.Infrastructure.App.StatesMachine
 {
     public class GameApplicationState : IState
     {
@@ -9,7 +10,7 @@ namespace FarnClash.Infrastructure.Application.StatesMachine
 
         }
 
-        public void Enter()
+        public async UniTask EnterAsync()
         {
 
         }

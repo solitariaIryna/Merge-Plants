@@ -1,8 +1,10 @@
-﻿using FarnClash.Constants;
-using FarnClash.Infrastructure.Application.StatesMachine;
+﻿using Cysharp.Threading.Tasks;
+using MergePlants.Constants;
+using MergePlants.Infrastructure.App.StatesMachine;
+using MergePlants.Infrastructure.Gameplay.StatesMachine;
 using Zenject;
 
-namespace FarnClash.Infrastructure
+namespace MergePlants.Infrastructure
 {
     public class ApplicationInitializer : IInitializable
     {
@@ -16,9 +18,19 @@ namespace FarnClash.Infrastructure
         public void Initialize()
         {
             _applicationStateMachine.Initialize();
-            _applicationStateMachine.Enter<StartupApplicationState>();
-            _applicationStateMachine.Enter<LoadingSceneApplicationState, string>(ApplicationConstants.GAME_SCENE);
+            Run();
            
+        }
+
+        private async UniTask Run()
+        {
+            await _applicationStateMachine.EnterAsync<StartupApplicationState>();
+
+            await _applicationStateMachine.EnterAsync<LoadingSceneApplicationState, string>(ApplicationConstants.GAME_SCENE);
+
+            await _applicationStateMachine.EnterAsync<LoadProgressApplicationState>();
+
+            await  _applicationStateMachine.EnterAsync<GameApplicationState>();
         }
     }
 

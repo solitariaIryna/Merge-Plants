@@ -1,6 +1,6 @@
 ﻿using Zenject;
 
-namespace FarnClash.Infrastructure.Application
+namespace MergePlants.Infrastructure.App
 {
     public class ApplicationRunner : MonoInstaller
     {

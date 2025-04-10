@@ -1,6 +1,6 @@
-﻿using FarmClash.UI;
+﻿using MergePlants.UI;
 
-namespace FarmClash.Services.Factory
+namespace MergePlants.Services.Factory
 {
     public interface IUIFactory
     {

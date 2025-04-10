@@ -1,10 +1,10 @@
-﻿using FarmClash.Services.Command;
-using FarnClash.Infrastructure.Game.Factory;
-using FarnClash.Infrastructure.Gameplay.StatesMachine;
-using FarnClash.Services.SlowMotion;
+﻿using MergePlants.Services.Command;
+using MergePlants.Infrastructure.Game.Factory;
+using MergePlants.Infrastructure.Gameplay.StatesMachine;
+using MergePlants.Services.SlowMotion;
 using Zenject;
 
-namespace FarnClash.Infrastructure.Installers
+namespace MergePlants.Infrastructure.Installers
 {
     public class GameplayInstaller : MonoInstaller
     {

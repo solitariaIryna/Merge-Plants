@@ -1,4 +1,6 @@
-﻿namespace FarnClash.Infrastructure.StateMachine
+﻿using Cysharp.Threading.Tasks;
+
+namespace MergePlants.Infrastructure.StateMachine
 {
     public interface IExitableState
     {
@@ -7,11 +9,11 @@
 
     public interface IState : IExitableState
     {
-        void Enter();
+        UniTask EnterAsync();
     }
 
     public interface IPayloadState<T> : IExitableState
     {
-        void Enter(T data);
+        UniTask EnterAsync(T data);
     }
 }

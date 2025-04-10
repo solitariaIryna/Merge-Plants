@@ -1,7 +1,7 @@
-﻿using FarnClash.Infrastructure.Gameplay.StatesMachine;
+﻿using MergePlants.Infrastructure.Gameplay.StatesMachine;
 using Zenject;
 
-namespace FarnClash.Infrastructure
+namespace MergePlants.Infrastructure
 {
     public class GameInitializer : IInitializable
     {
@@ -14,7 +14,7 @@ namespace FarnClash.Infrastructure
         public void Initialize()
         {
             _gameplayStateMachine.Initialize();
-            _gameplayStateMachine.Enter<LoadBattleState>();
+            _gameplayStateMachine.EnterAsync<LoadLevelState>();
         }
     }
 }

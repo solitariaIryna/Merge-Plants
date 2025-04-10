@@ -1,10 +1,10 @@
-﻿using FarnClash.Infrastructure.StateMachine;
+﻿using MergePlants.Infrastructure.StateMachine;
 using System;
 using System.Collections.Generic;
 using Zenject;
 
 
-namespace FarnClash.Infrastructure.Gameplay.StatesMachine
+namespace MergePlants.Infrastructure.Gameplay.StatesMachine
 {
     public class GameplayStatesFactory
     {
@@ -17,7 +17,7 @@ namespace FarnClash.Infrastructure.Gameplay.StatesMachine
 
         public Dictionary<Type, IExitableState> CreateStates() => new Dictionary<Type, IExitableState>
         {
-            { typeof(LoadBattleState), _container.Instantiate<LoadBattleState>() },
+            { typeof(LoadLevelState), _container.Instantiate<LoadLevelState>() },
             { typeof(GameLoopState), _container.Instantiate<GameLoopState>() },
             { typeof(WinGameState), _container.Instantiate<WinGameState>() },
             { typeof(LoseGameState), _container.Instantiate<LoseGameState>() }

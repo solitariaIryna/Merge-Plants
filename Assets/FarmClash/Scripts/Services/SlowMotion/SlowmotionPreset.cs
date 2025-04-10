@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace FarnClash.Services.SlowMotion
+namespace MergePlants.Services.SlowMotion
 {
     [CreateAssetMenu(fileName = nameof(SlowmotionPreset), menuName = "Configs/SlowMotion/SlowmotionPreset")]
     public class SlowmotionPreset : ScriptableObject

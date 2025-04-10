@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 
-namespace FarmClash.Helpers.Extentions
+namespace MergePlants.Helpers.Extentions
 {
     public static class RandomExtentions
     {

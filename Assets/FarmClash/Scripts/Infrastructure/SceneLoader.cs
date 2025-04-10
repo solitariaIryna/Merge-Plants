@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace FarnClash.Infrastructure
+namespace MergePlants.Infrastructure
 {
     public class SceneLoader
     {

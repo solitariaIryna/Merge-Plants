@@ -1,4 +1,4 @@
-﻿namespace FarnClash.Constants
+﻿namespace MergePlants.Constants
 {
     public static class ApplicationConstants
     {

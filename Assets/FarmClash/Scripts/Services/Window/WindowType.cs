@@ -1,4 +1,4 @@
-﻿namespace FarmClash.Services.Window
+﻿namespace MergePlants.Services.Window
 {
     public enum WindowType
     {

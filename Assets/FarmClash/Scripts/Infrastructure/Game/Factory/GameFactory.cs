@@ -1,7 +1,7 @@
-﻿using FarnClash.Services.AssetProvider;
+﻿using MergePlants.Services.AssetProvider;
 using Zenject;
 
-namespace FarnClash.Infrastructure.Game.Factory
+namespace MergePlants.Infrastructure.Game.Factory
 {
     public class GameFactory
     {

@@ -1,9 +1,9 @@
 ﻿
-namespace FarmClash.Services.Command
+namespace MergePlants.Services.Command
 {
     public interface ICommand<TParameter> where TParameter : ICommandParameter
     {
-        bool Execute(TParameter command);
+        bool Execute(TParameter parameters);
     }
 
 }

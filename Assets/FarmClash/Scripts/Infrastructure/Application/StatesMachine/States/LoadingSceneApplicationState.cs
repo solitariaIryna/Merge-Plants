@@ -1,23 +1,20 @@
 ﻿using Cysharp.Threading.Tasks;
-using FarnClash.Infrastructure.StateMachine;
+using MergePlants.Infrastructure.StateMachine;
 
-namespace FarnClash.Infrastructure.Application.StatesMachine
+namespace MergePlants.Infrastructure.App.StatesMachine
 {
     public class LoadingSceneApplicationState : IPayloadState<string>
     {
-        private ApplicationStateMachine _applicationStateMachine;
         private SceneLoader _sceneLoader;
 
-        public LoadingSceneApplicationState(ApplicationStateMachine applicationStateMachine,
-            SceneLoader sceneLoader)
+        public LoadingSceneApplicationState(SceneLoader sceneLoader)
         {
-            _applicationStateMachine = applicationStateMachine;
             _sceneLoader = sceneLoader;
         }
 
-        public void Enter(string sceneName)
+        public async UniTask EnterAsync(string sceneName)
         {
-            LoadScene(sceneName);
+           await LoadScene(sceneName);
         }
 
         public void Exit()
@@ -28,8 +25,6 @@ namespace FarnClash.Infrastructure.Application.StatesMachine
         private async UniTask LoadScene(string sceneName)
         {
             await _sceneLoader.Load(sceneName);
-
-            _applicationStateMachine.Enter<GameApplicationState>();
         }
     }
 

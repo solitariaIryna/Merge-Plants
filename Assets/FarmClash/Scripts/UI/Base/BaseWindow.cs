@@ -1,7 +1,7 @@
 ﻿
 using UnityEngine;
 
-namespace FarmClash.UI
+namespace MergePlants.UI
 {
     public abstract class BaseWindow : MonoBehaviour
     {

@@ -1,6 +1,6 @@
-﻿using FarnClash.Infrastructure.StateMachine;
+﻿using MergePlants.Infrastructure.StateMachine;
 
-namespace FarnClash.Infrastructure.Application.StatesMachine
+namespace MergePlants.Infrastructure.App.StatesMachine
 {
     public class ApplicationStateMachine : BaseStateMachine
     {

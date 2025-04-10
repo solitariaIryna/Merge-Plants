@@ -1,9 +1,9 @@
 ﻿using Cysharp.Threading.Tasks;
-using FarnClash.Constants;
+using MergePlants.Constants;
 using System;
 using UnityEngine;
 
-namespace FarnClash.Services.SlowMotion
+namespace MergePlants.Services.SlowMotion
 {
     public class SlowMotionService
     {

@@ -1,7 +1,9 @@
-﻿using FarnClash.Infrastructure.StateMachine;
-using FarnClash.Services.ConfigsProvider;
+﻿using Cysharp.Threading.Tasks;
+using MergePlants.Infrastructure.StateMachine;
+using MergePlants.Services.ConfigsProvider;
+using UnityEngine;
 
-namespace FarnClash.Infrastructure.Application.StatesMachine
+namespace MergePlants.Infrastructure.App.StatesMachine
 {
     public class StartupApplicationState : IState
     {
@@ -12,9 +14,14 @@ namespace FarnClash.Infrastructure.Application.StatesMachine
             _configsProvider = configsProvider;
         }
 
-        public void Enter()
+        public async UniTask EnterAsync()
         {
-            _configsProvider.LoadAll();
+            Application.targetFrameRate = 60;
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
+            Input.multiTouchEnabled = false;
+
+
+           await _configsProvider.LoadAll();
         }
 
         public void Exit()
