@@ -1,4 +1,6 @@
-﻿namespace MergePlants.State.Entities
+﻿using UnityEngine;
+
+namespace MergePlants.State.Entities
 {
     public abstract class Entity
     {
@@ -6,6 +8,9 @@
         public int UniqueId => Data.UniqueId;
         public string ConfigId => Data.ConfigId;
         public EntityType Type => Data.Type;
+
+        public Vector3 StartPosition { get; }
+        public Vector3 Position { get; set; }
 
         public Entity(EntityData data)
         {

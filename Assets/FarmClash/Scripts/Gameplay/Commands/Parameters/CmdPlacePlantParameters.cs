@@ -2,7 +2,7 @@
 using MergePlants.Services.Command;
 using UnityEngine;
 
-namespace FarmClash.Gameplay.Commands.Parameters
+namespace MergerPlants.Gameplay.Commands.Parameters
 {
     public class CmdPlacePlantParameters : ICommandParameter
     {

@@ -1,10 +1,10 @@
-﻿using FarmClash.Gameplay.Commands.Parameters;
+﻿using MergerPlants.Gameplay.Commands.Parameters;
 using MergePlants.Services.Command;
 using MergePlants.State.GameResources;
 using MergePlants.State.Root;
 using System.Linq;
 
-namespace FarmClash.Gameplay.Commands
+namespace MergerPlants.Gameplay.Commands
 {
     public class CmdResourceAdd : ICommand<CmdResourceParameters>
     {

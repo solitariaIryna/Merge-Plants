@@ -1,7 +1,7 @@
 ﻿using MergePlants.Services.Command;
 using MergePlants.State.GameResources;
 
-namespace FarmClash.Gameplay.Commands.Parameters
+namespace MergerPlants.Gameplay.Commands.Parameters
 {
     public class CmdResourceSpendParameters : ICommandParameter
     {

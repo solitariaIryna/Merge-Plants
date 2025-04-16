@@ -1,5 +1,5 @@
-﻿using FarmClash.Configs;
-using FarmClash.Configs.Levels;
+﻿using MergerPlants.Configs;
+using MergerPlants.Configs.Levels;
 using MergePlants.Services.Command;
 using MergePlants.State.Levels;
 using MergePlants.State.Root;

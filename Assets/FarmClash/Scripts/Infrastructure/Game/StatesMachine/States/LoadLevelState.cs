@@ -1,5 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
-using FarmClash.Gameplay.Commands;
+using MergerPlants.Gameplay.Commands;
 using MergePlants.Gameplay.Commands.Parameters;
 using MergePlants.Infrastructure.Game.Factory;
 using MergePlants.Infrastructure.StateMachine;

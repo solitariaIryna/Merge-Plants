@@ -1,8 +1,8 @@
-﻿using FarmClash.Gameplay.Commands.Parameters;
+﻿using MergerPlants.Gameplay.Commands.Parameters;
 using MergePlants.Services.Command;
 using MergePlants.State.Root;
 
-namespace FarmClash.Gameplay.Commands
+namespace MergerPlants.Gameplay.Commands
 {
     public class CmdPlacePlant : ICommand<CmdPlacePlantParameters>
     {

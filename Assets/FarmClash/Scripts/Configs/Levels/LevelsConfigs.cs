@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace FarmClash.Configs.Levels
+namespace MergerPlants.Configs.Levels
 {
     [CreateAssetMenu(fileName = nameof(LevelsConfigs), menuName = "Configs/Levels/" + nameof(LevelsConfigs))]
     public class LevelsConfigs : ScriptableObject

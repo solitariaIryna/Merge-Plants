@@ -1,6 +1,6 @@
 ﻿
 using Cysharp.Threading.Tasks;
-using FarmClash.Configs;
+using MergerPlants.Configs;
 
 namespace MergePlants.Services.ConfigsProvider
 {
