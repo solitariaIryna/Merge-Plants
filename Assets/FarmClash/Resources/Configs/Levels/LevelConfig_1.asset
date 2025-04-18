@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: LevelConfig_1
   m_EditorClassIdentifier: 
   LevelId: 0
+  CellCount: {x: 4, y: 4}
+  StartPosition: {x: -0.5, y: 0.6658, z: 0}
+  CellOffset: {x: 0.32, y: 0.32, z: 0}

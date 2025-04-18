@@ -9,7 +9,7 @@ namespace MergePlants.State.Root
     public class GameStateProxy
     {
         private readonly GameState _gameState;
-        private readonly ReactiveProperty<int> CurrentMapId = new();
+        public readonly ReactiveProperty<int> CurrentLevelId = new();
 
         public ObservableList<Level> Levels { get; } = new();
         public ObservableList<Resource> Resources { get; } = new();
@@ -21,7 +21,7 @@ namespace MergePlants.State.Root
             InitLevel(gameState);
             InitResources(gameState);
 
-            CurrentMapId.Subscribe(newValue => gameState.CurrentLevelId = newValue);
+            CurrentLevelId.Subscribe(newValue => gameState.CurrentLevelId = newValue);
         }
         public int CreateEntityId() =>
             _gameState.CreateEntityId();
@@ -42,7 +42,7 @@ namespace MergePlants.State.Root
                 gameState.Levels.Remove(removedLevelState);
             });
 
-        }
+        }   
         private void InitResources(GameState gameState)
         {
             gameState.Resources.ForEach(resourceData => Resources.Add(new Resource(resourceData)));

@@ -15,6 +15,7 @@ namespace MergePlants.State.Entities
         public Entity(EntityData data)
         {
             Data = data;
+            Position = Data.Position;
         }
 
     }

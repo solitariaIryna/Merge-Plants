@@ -1,7 +1,7 @@
 ﻿using MergePlants.Services.Command;
 using MergePlants.State.GameResources;
 
-namespace MergerPlants.Gameplay.Commands.Parameters
+namespace MergePlants.Gameplay.Commands.Parameters
 {
     public class CmdResourceParameters : ICommandParameter
     {

@@ -3,13 +3,20 @@ using MergePlants.Infrastructure.Game.Factory;
 using MergePlants.Infrastructure.Gameplay.StatesMachine;
 using MergePlants.Services.SlowMotion;
 using Zenject;
+using UnityEngine;
+using MergePlants.Gameplay.Services;
 
 namespace MergePlants.Infrastructure.Installers
 {
     public class GameplayInstaller : MonoInstaller
     {
+        [SerializeField] private InputService _inputService;
         public override void InstallBindings()
         {
+            Container
+                .BindInterfacesAndSelfTo<InputService>()
+                .AsSingle();
+
             Container
                 .Bind<ICommandProcessor>()
                 .To<CommandProcessor>()
@@ -24,6 +31,22 @@ namespace MergePlants.Infrastructure.Installers
                 .AsSingle();
 
             Container
+                .BindInterfacesAndSelfTo<PlantsService>()
+                .AsSingle();
+
+            Container
+                .BindInterfacesAndSelfTo<ResourcesService>()
+                .AsSingle();
+
+            Container
+                .BindInterfacesAndSelfTo<LevelsService>()
+                .AsSingle();
+
+            Container
+                 .BindInterfacesAndSelfTo<CellsService>()
+                .AsSingle();
+
+            Container
                .Bind<GameplayStatesFactory>()
                .AsSingle();
 
@@ -31,7 +54,7 @@ namespace MergePlants.Infrastructure.Installers
                 .BindInterfacesAndSelfTo<GameplayStateMachine>()
                 .AsSingle();
 
-
+           
         }
     }
 }

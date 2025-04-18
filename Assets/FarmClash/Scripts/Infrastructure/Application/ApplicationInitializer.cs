@@ -26,9 +26,9 @@ namespace MergePlants.Infrastructure
         {
             await _applicationStateMachine.EnterAsync<StartupApplicationState>();
 
-            await _applicationStateMachine.EnterAsync<LoadingSceneApplicationState, string>(ApplicationConstants.GAME_SCENE);
-
             await _applicationStateMachine.EnterAsync<LoadProgressApplicationState>();
+
+            await _applicationStateMachine.EnterAsync<LoadingSceneApplicationState, string>(ApplicationConstants.GAME_SCENE);
 
             await  _applicationStateMachine.EnterAsync<GameApplicationState>();
         }

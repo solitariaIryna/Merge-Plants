@@ -81,7 +81,7 @@ MonoBehaviour:
     converterName: Newtonsoft.Json.UnityConverters.Math.SphericalHarmonicsL2Converter
     converterAssembly: Newtonsoft.Json.UnityConverters
     settings: []
-  - enabled: 0
+  - enabled: 1
     converterName: Newtonsoft.Json.UnityConverters.Math.Vector2Converter
     converterAssembly: Newtonsoft.Json.UnityConverters
     settings: []

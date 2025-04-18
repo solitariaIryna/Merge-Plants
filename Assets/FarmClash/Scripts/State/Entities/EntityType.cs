@@ -5,5 +5,6 @@
         Unknown = 0,
         Plant = 1,
         Enemy = 2,
+        Cell = 3
     }
 }

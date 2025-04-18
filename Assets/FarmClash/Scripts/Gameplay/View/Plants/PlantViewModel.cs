@@ -1,20 +1,32 @@
-﻿using MergePlants.Gameplay.Services;
+﻿using MergePlants.Configs.Plants;
+using MergePlants.Gameplay.Services;
+using MergePlants.State.Entities;
 using MergePlants.State.Entities.Plants;
-using MergerPlants.Gameplay.View.Draggable;
+using R3;
 using UnityEngine;
 
-namespace MergerPlants.Gameplay.View.Plants
+namespace MergePlants.Gameplay.View.Plants
 {
-    public class PlantViewModel : ReturningDraggableViewModel
+    public class PlantViewModel
     {
         private readonly PlantEntity _plantEntity;
         private readonly PlantsService _plantsService;
+
+        public readonly int EntityId;
+        public readonly PlantAvatarConfig Config;
+        public ReactiveProperty<int> Level { get; } = new();
+
+        public readonly EntityType Type;
+        public ReactiveProperty<Vector3> Position { get; } = new();
       
-        public PlantViewModel(PlantEntity plantEntity, PlantsService plantsService)
+        public PlantViewModel(PlantEntity plantEntity, PlantAvatarConfig config, PlantsService plantsService)
         {
             _plantEntity = plantEntity;
             _plantsService = plantsService;
-
+            Config = config;
+            Type = plantEntity.Type;
+            EntityId = plantEntity.UniqueId;
+            Level.Value = plantEntity.Level.Value;
             Position.Value = plantEntity.Position;
         }
 
@@ -23,31 +35,15 @@ namespace MergerPlants.Gameplay.View.Plants
             Position.Value = newPosition;
             _plantEntity.Position = newPosition;
         }
-    }
-    public class PlantBinder : ReturningDraggableBinder
-    {
-        private PlantViewModel _plantViewModel;
-        public void Bind(PlantViewModel viewModel)
+
+        public bool TryRequestMerge(IMergable other)
         {
-            _plantViewModel = viewModel;
-
-            base.Bind(viewModel);
+            if (other.Type == Type && other.Level == Level.Value)
+            {
+                _plantsService.TryMergePlants(EntityId, other.EntityId);
+                return true;
+            }
+            return false;
         }
-
-        public override void OnSelectionStarted(Vector3 position)
-        {
-            base.OnSelectionStarted(position);
-        }
-
-        public override void OnSelectionHolded(Vector2 position)
-        {
-            base.OnSelectionHolded(position);
-        }
-
-        public override void OnSelectionEnded(Vector3 position)
-        {
-            base.OnSelectionEnded(position);
-        }
-
     }
 }

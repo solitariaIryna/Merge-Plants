@@ -64,7 +64,13 @@ namespace MergePlants.Services.SaveLoad
         }
         public Observable<bool> SaveGameState()
         {
-            var json = JsonConvert.SerializeObject(_gameState, Formatting.Indented);
+            var settings = new JsonSerializerSettings
+            {
+                Formatting = Formatting.Indented,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+
+            var json = JsonConvert.SerializeObject(_gameState, settings);
             PlayerPrefs.SetString(GAME_STATE_KEY, json);
 
             return Observable.Return(true);

@@ -1,10 +1,10 @@
-﻿using MergerPlants.Gameplay.Commands.Parameters;
+﻿using MergePlants.Gameplay.Commands.Parameters;
 using MergePlants.Services.Command;
 using MergePlants.State.GameResources;
 using MergePlants.State.Root;
 using System.Linq;
 
-namespace MergerPlants.Gameplay.Commands
+namespace MergePlants.Gameplay.Commands
 {
     public class CmdResourceAdd : ICommand<CmdResourceParameters>
     {

@@ -1,5 +1,5 @@
-﻿using MergerPlants.Configs;
-using MergerPlants.Configs.Levels;
+﻿using MergePlants.Configs;
+using MergePlants.Configs.Levels;
 using MergePlants.Services.Command;
 using MergePlants.State.Levels;
 using MergePlants.State.Root;
@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace MergePlants.Gameplay.Commands.Parameters
 {
-    public class CmdCreateLevel : ICommand<CmdCreateLevelParameters>
+    public class CmdCreateLevel : ICommandWithResult<CmdCreateLevelParameters, Level>
     {
         private readonly GameStateProxy _gameState;
         private readonly GameConfig _gameConfig;
@@ -19,14 +19,14 @@ namespace MergePlants.Gameplay.Commands.Parameters
             _gameConfig = gameConfig;
         }
 
-        public bool Execute(CmdCreateLevelParameters parameters)
+        public CommandResult<Level> Execute(CmdCreateLevelParameters parameters)
         {
             bool isLevelAlreadyExisted = _gameState.Levels.Any(l => l.Id == parameters.LevelId);
 
             if (isLevelAlreadyExisted)
             {
                 Debug.LogError($"Level with Id = {parameters.LevelId} already exists");
-                return false;
+                return new CommandResult<Level>(false, null);
             }
 
             LevelConfig newLevelConfig = _gameConfig.LevelsConfigs.Levels.First(l => l.LevelId == parameters.LevelId);
@@ -35,14 +35,13 @@ namespace MergePlants.Gameplay.Commands.Parameters
             var newLevelState = new LevelData
             {
                 Id = parameters.LevelId,
-                Entities = null
             };
 
             var newLevelStateProxy = new Level(newLevelState);
 
             _gameState.Levels.Add(newLevelStateProxy);
 
-            return true;
+            return new CommandResult<Level>(true, newLevelStateProxy);
         }
     }
 }

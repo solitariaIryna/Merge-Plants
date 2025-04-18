@@ -1,18 +1,17 @@
 ﻿
 using MergePlants.Services.Command;
-using UnityEngine;
 
-namespace MergerPlants.Gameplay.Commands.Parameters
+namespace MergePlants.Gameplay.Commands.Parameters
 {
     public class CmdPlacePlantParameters : ICommandParameter
     {
-        private readonly int Level;
-        private readonly Vector3 Position;
+        public readonly int Level;
+        public readonly int CellId;
 
-        public CmdPlacePlantParameters(int level, Vector3 position)
+        public CmdPlacePlantParameters(int level, int cellId)
         {
             Level = level;
-            Position = position;
+            CellId = cellId;
         }
     }
 }

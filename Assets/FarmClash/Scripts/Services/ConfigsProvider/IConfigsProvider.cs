@@ -1,6 +1,7 @@
 ﻿
 using Cysharp.Threading.Tasks;
-using MergerPlants.Configs;
+using MergePlants.Configs;
+using MergePlants.Configs.Plants;
 
 namespace MergePlants.Services.ConfigsProvider
 {
@@ -8,6 +9,7 @@ namespace MergePlants.Services.ConfigsProvider
     {
         GameConfig GameConfig { get; }
 
+        PlantAvatarConfig[] GetAllPlants();
         UniTask LoadAll();
     }
 }

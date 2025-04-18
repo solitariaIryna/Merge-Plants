@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace MergerPlants.Configs.Levels
+namespace MergePlants.Configs.Levels
 {
     [CreateAssetMenu(fileName = nameof(LevelsConfigs), menuName = "Configs/Levels/" + nameof(LevelsConfigs))]
     public class LevelsConfigs : ScriptableObject
