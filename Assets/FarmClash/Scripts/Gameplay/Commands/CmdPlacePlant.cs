@@ -11,7 +11,6 @@ using MergePlants.State.Entities.Cells;
 
 namespace MergePlants.Gameplay.Commands
 {
-
     public class CmdPlacePlant : ICommandWithResult<CmdPlacePlantParameters, PlantEntity>
     {
         private readonly GameStateProxy _gameState;

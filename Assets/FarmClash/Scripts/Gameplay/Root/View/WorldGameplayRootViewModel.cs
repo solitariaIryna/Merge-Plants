@@ -1,5 +1,6 @@
 ﻿using MergePlants.Gameplay.Services;
 using MergePlants.Gameplay.View.Cells;
+using MergePlants.Gameplay.View.Enemies;
 using MergePlants.Gameplay.View.Levels;
 using MergePlants.Gameplay.View.Plants;
 using ObservableCollections;
@@ -13,16 +14,18 @@ namespace MergePlants.Gameplay.Root.View
 
         public readonly IObservableCollection<PlantViewModel> AllPlants;
         public readonly IObservableCollection<CellViewModel> Cells;
+        public readonly IObservableCollection<EnemyViewModel> Enemies;
 
         public ReactiveProperty<LevelViewModel> CurrentLevel { get; }
 
         public WorldGameplayRootViewModel(PlantsService plantsService, ResourcesService resourcesService,
-            LevelsService levelsService, CellsService cellsService)
+            LevelsService levelsService, CellsService cellsService, EnemiesService enemiesService)
         {
             _resourcesService = resourcesService;
             AllPlants = plantsService.AllPlants;
             CurrentLevel = levelsService.CurrentLevel;
             Cells = cellsService.AllCells;
+            Enemies = enemiesService.AllEnemies;
 
             //resourcesService.ObserveResource(ResourceType.SoftCurrency)
             //    .Subscribe(newValue => Debug.Log($"SoftCurrency: {newValue}"));

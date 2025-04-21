@@ -1,4 +1,5 @@
 ﻿using MergePlants.Gameplay.View.Cells;
+using MergePlants.Gameplay.View.Enemies;
 using MergePlants.Gameplay.View.Levels;
 using MergePlants.Gameplay.View.Plants;
 using ObservableCollections;
@@ -11,15 +12,19 @@ namespace MergePlants.Gameplay.Root.View
     public class WorldGameplayRootBinder : MonoBehaviour
     {
         private readonly Dictionary<int, PlantBinder> _createdPlantsMap = new();
+        private readonly Dictionary<int, EnemyBinder> _createdEnemiesMap= new();
         private readonly CompositeDisposable _disposables = new();
 
         private WorldGameplayRootViewModel _viewModel;
 
         private Transform _cellsParent;
+        private Transform _enemyParent;
 
         public void Bind(WorldGameplayRootViewModel viewModel)
         {
             _viewModel = viewModel;
+
+            _enemyParent = new GameObject("Enemies").transform;
 
             if (viewModel.CurrentLevel.Value != null)
                 CreateLevel(viewModel.CurrentLevel.Value);
@@ -41,6 +46,30 @@ namespace MergePlants.Gameplay.Root.View
 
             _disposables.Add(viewModel.Cells.ObserveAdd()
                 .Subscribe(e => CreateCell(e.Value)));
+
+            _disposables.Add(viewModel.Enemies.ObserveAdd()
+                .Subscribe(e => CreateEnemy(e.Value)));
+
+            _disposables.Add(viewModel.Enemies.ObserveRemove()
+                .Subscribe(e => DeleteEnemy(e.Value)));
+                
+        }
+
+        private void CreateEnemy(EnemyViewModel enemyViewModel)
+        {
+            var prefabEnemyPath = $"Gameplay/Entities/Enemy";
+            var enemyPrefab = Resources.Load<EnemyBinder>(prefabEnemyPath);
+            var createdEnemy = Instantiate(enemyPrefab);
+            createdEnemy.transform.parent = _enemyParent;
+            createdEnemy.Bind(enemyViewModel);
+        }
+        private void DeleteEnemy(EnemyViewModel enemyViewModel)
+        {
+            if (_createdEnemiesMap.TryGetValue(enemyViewModel.EntityId, out var buildingBinder))
+            {
+                Destroy(buildingBinder.gameObject);
+                _createdEnemiesMap.Remove(enemyViewModel.EntityId);
+            }
         }
 
         private void CreateCell(CellViewModel cellViewModel)

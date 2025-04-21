@@ -43,7 +43,11 @@ namespace MergePlants.Infrastructure.Installers
                 .AsSingle();
 
             Container
-                 .BindInterfacesAndSelfTo<CellsService>()
+                .BindInterfacesAndSelfTo<CellsService>()
+                .AsSingle();
+
+            Container
+                .BindInterfacesAndSelfTo<EnemiesService>()
                 .AsSingle();
 
             Container

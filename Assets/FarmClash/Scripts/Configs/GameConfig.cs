@@ -1,4 +1,5 @@
-﻿using MergePlants.Configs.Levels;
+﻿using MergePlants.Configs.Enemies;
+using MergePlants.Configs.Levels;
 using MergePlants.Configs.Plants;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ namespace MergePlants.Configs
     {
         public LevelsConfigs LevelsConfigs;
         public PlantsConfigs PlantsConfigs;
+        public EnemiesConfigs EnemiesConfigs;
 
     }
 }

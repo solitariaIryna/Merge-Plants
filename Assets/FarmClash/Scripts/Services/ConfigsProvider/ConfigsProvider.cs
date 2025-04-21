@@ -1,6 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using MergePlants.Configs;
 using MergePlants.Configs.Plants;
+using MergePlants.Configs.Enemies;
 using MergePlants.Services.AssetProvider;
 
 namespace MergePlants.Services.ConfigsProvider
@@ -21,5 +22,8 @@ namespace MergePlants.Services.ConfigsProvider
 
         public PlantAvatarConfig[] GetAllPlants() =>
             GameConfig.PlantsConfigs.Plants;
+
+        public EnemyAvatarConfig[] GetAllEnemies() =>
+            GameConfig.EnemiesConfigs.Enemies;
     }
 }

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelsConfigs: {fileID: 11400000, guid: f192adc2150a2b445b5ef3a9732f5a1e, type: 2}
   PlantsConfigs: {fileID: 11400000, guid: 8a288589a8e8ad643a2a8e76eb5447e3, type: 2}
+  EnemiesConfigs: {fileID: 11400000, guid: 3817e82086eec774dae27ac891126d16, type: 2}

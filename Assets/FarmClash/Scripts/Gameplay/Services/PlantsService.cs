@@ -17,7 +17,7 @@ namespace MergePlants.Gameplay.Services
     {
         public IObservableCollection<PlantViewModel> AllPlants => _allPlants;
 
-        public ObservableList<PlantEntity> plants = new();
+        private ObservableList<PlantEntity> _plants = new();
 
         private readonly ObservableList<PlantViewModel> _allPlants = new();
         private readonly Dictionary<int, PlantAvatarConfig> _plantsConfigs = new();
@@ -38,21 +38,21 @@ namespace MergePlants.Gameplay.Services
                 foreach (Entity entity in saveLoadService.GameState.Levels[saveLoadService.GameState.CurrentLevelId.Value].Entities)
                 {
                     if (entity is PlantEntity plantEntity)
-                        plants.Add(plantEntity);
+                        _plants.Add(plantEntity);
                 }
 
-                foreach (var plantEntity in plants)
+                foreach (var plantEntity in _plants)
                 {
                     CreatePlantViewModel(plantEntity);
                 }
 
             }
-            plants.ObserveAdd().Subscribe(e =>
+            _plants.ObserveAdd().Subscribe(e =>
             {
                 CreatePlantViewModel(e.Value);
             });
 
-            plants.ObserveRemove().Subscribe(e =>
+            _plants.ObserveRemove().Subscribe(e =>
             {
                 RemovePlantViewModel(e.Value);
             });
@@ -61,7 +61,7 @@ namespace MergePlants.Gameplay.Services
         {
             var parameters = new CmdPlacePlantParameters(level, cellId);
             CommandResult<PlantEntity> result = _cmd.Process<CmdPlacePlantParameters, PlantEntity>(parameters);
-            plants.Add(result.Result);
+            _plants.Add(result.Result);
 
             return result.Success;
         }
@@ -84,16 +84,16 @@ namespace MergePlants.Gameplay.Services
 
         public void TryMergePlants(int firstPlantId, int secondPlantId)
         {
-            PlantEntity firstPlant = plants.FirstOrDefault(p => p.UniqueId == firstPlantId);
-            plants.Remove(firstPlant);
+            PlantEntity firstPlant = _plants.FirstOrDefault(p => p.UniqueId == firstPlantId);
+            _plants.Remove(firstPlant);
 
             var parameters1 = new CmdDeletePlantParameters(firstPlant);
             bool result1 = _cmd.Process(parameters1);
 
-            PlantEntity secondPlant = plants.FirstOrDefault(p => p.UniqueId == secondPlantId);
+            PlantEntity secondPlant = _plants.FirstOrDefault(p => p.UniqueId == secondPlantId);
             int cellId = secondPlant.CellId.Value;
             int level = secondPlant.Level.Value + 1;
-            plants.Remove(secondPlant);
+            _plants.Remove(secondPlant);
 
             var parameters2 = new CmdDeletePlantParameters(secondPlant);
             bool result2 = _cmd.Process(parameters2);

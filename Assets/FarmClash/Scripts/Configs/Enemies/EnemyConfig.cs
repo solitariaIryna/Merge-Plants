@@ -1,12 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace MergePlants.Configs.Enemies
 {
-    public class EnemyConfig : ScriptableObject
+    [Serializable]
+    public class EnemyConfig
     {
         [field: SerializeField] public string ConfigId { get; private set; }
         [field: SerializeField] public string DisplayName { get; private set; }
-        [field: SerializeField] public string Visual { get; private set; }
+        [field: SerializeField] public EnemyType Type { get; private set; }
 
         [Header("Stats")]
         [field: SerializeField] public float Health { get; private set; }

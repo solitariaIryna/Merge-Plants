@@ -23,10 +23,11 @@ namespace MergePlants.Infrastructure.Gameplay.StatesMachine
         private readonly ResourcesService _resourcesService;
         private readonly LevelsService _levelsService;
         private readonly CellsService _cellsService;
+        private readonly EnemiesService _enemiesService;
 
         public LoadLevelState(GameFactory gameFactory, ISaveLoadService saveLoadService, 
             IConfigsProvider configsProvider, ICommandProcessor commandProcessor, PlantsService plantService,
-            ResourcesService resourcesService, LevelsService levelsService, CellsService cellService)
+            ResourcesService resourcesService, LevelsService levelsService, CellsService cellService, EnemiesService enemiesService)
         {
             _gameFactory = gameFactory;
             _saveLoadService = saveLoadService;
@@ -36,6 +37,7 @@ namespace MergePlants.Infrastructure.Gameplay.StatesMachine
             _resourcesService = resourcesService;
             _levelsService = levelsService;
             _cellsService = cellService;
+            _enemiesService = enemiesService;
         }
 
         public async UniTask EnterAsync()
@@ -49,7 +51,7 @@ namespace MergePlants.Infrastructure.Gameplay.StatesMachine
         private void InitWorld()
         {
             WorldGameplayRootViewModel worldGameplayRootViewModel = new WorldGameplayRootViewModel(_plantService, _resourcesService, 
-                _levelsService, _cellsService);
+                _levelsService, _cellsService, _enemiesService);
 
             WorldGameplayRootBinder worldGameplayRootBinder = new GameObject("WorldGamePlayRootBinder")
                 .AddComponent<WorldGameplayRootBinder>();
@@ -84,6 +86,7 @@ namespace MergePlants.Infrastructure.Gameplay.StatesMachine
             _commandProcessor.RegisterCommand(new CmdPlacePlant(_saveLoadService.GameState, _cellsService));
             _commandProcessor.RegisterCommand(new CmdDeletePlant(_saveLoadService.GameState, _cellsService));
             _commandProcessor.RegisterCommand(new CmdCreateCell(_saveLoadService.GameState));
+            _commandProcessor.RegisterCommand(new CmdCreateEnemy(_saveLoadService.GameState));
         }
 
         public void Exit()
