@@ -2,9 +2,9 @@
 
 namespace MergePlants.State.Entities
 {
-    public abstract class Entity
+    public abstract class Entity : MonoBehaviour
     {
-        public EntityData Data { get; }
+        public EntityData Data { get; private set; }
         public int UniqueId => Data.UniqueId;
         public string ConfigId => Data.ConfigId;
         public EntityType Type => Data.Type;
@@ -12,7 +12,7 @@ namespace MergePlants.State.Entities
         public Vector3 StartPosition { get; }
         public Vector3 Position { get; set; }
 
-        public Entity(EntityData data)
+        public void SetData(EntityData data)
         {
             Data = data;
             Position = Data.Position;

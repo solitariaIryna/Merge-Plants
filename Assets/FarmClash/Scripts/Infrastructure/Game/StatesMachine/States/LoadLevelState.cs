@@ -8,8 +8,8 @@ using MergePlants.Services.ConfigsProvider;
 using MergePlants.Services.SaveLoad;
 using Unity.Cinemachine;
 using UnityEngine;
-using MergePlants.Gameplay.Root.View;
 using MergePlants.Gameplay.Services;
+using MergePlants.State.Entities;
 
 namespace MergePlants.Infrastructure.Gameplay.StatesMachine
 {
@@ -24,10 +24,12 @@ namespace MergePlants.Infrastructure.Gameplay.StatesMachine
         private readonly LevelsService _levelsService;
         private readonly CellsService _cellsService;
         private readonly EnemiesService _enemiesService;
+        private readonly EntitiesFactory _entitiesFactory;
 
         public LoadLevelState(GameFactory gameFactory, ISaveLoadService saveLoadService, 
             IConfigsProvider configsProvider, ICommandProcessor commandProcessor, PlantsService plantService,
-            ResourcesService resourcesService, LevelsService levelsService, CellsService cellService, EnemiesService enemiesService)
+            ResourcesService resourcesService, LevelsService levelsService, CellsService cellService,
+            EnemiesService enemiesService, EntitiesFactory entitiesFactory)
         {
             _gameFactory = gameFactory;
             _saveLoadService = saveLoadService;
@@ -38,6 +40,7 @@ namespace MergePlants.Infrastructure.Gameplay.StatesMachine
             _levelsService = levelsService;
             _cellsService = cellService;
             _enemiesService = enemiesService;
+            _entitiesFactory = entitiesFactory;
         }
 
         public async UniTask EnterAsync()
@@ -50,13 +53,8 @@ namespace MergePlants.Infrastructure.Gameplay.StatesMachine
 
         private void InitWorld()
         {
-            WorldGameplayRootViewModel worldGameplayRootViewModel = new WorldGameplayRootViewModel(_plantService, _resourcesService, 
-                _levelsService, _cellsService, _enemiesService);
-
-            WorldGameplayRootBinder worldGameplayRootBinder = new GameObject("WorldGamePlayRootBinder")
-                .AddComponent<WorldGameplayRootBinder>();
-
-            worldGameplayRootBinder.Bind(worldGameplayRootViewModel);
+          //  int currentLevelId = (_saveLoadService.GameState.GameState.CurrentLevelId);
+          //  _saveLoadService.GameState.InitLevel(_gameFactory.CreateLevel(_saveLoadService.GameState.GameState.Levels[currentLevelId]));
 
             _levelsService.CreateLevel(0);
 
@@ -80,13 +78,14 @@ namespace MergePlants.Infrastructure.Gameplay.StatesMachine
 
         private void RegisterGameplayCommands()
         {
-            _commandProcessor.RegisterCommand(new CmdCreateLevel(_saveLoadService.GameState, _configsProvider.GameConfig));
+            _commandProcessor.RegisterCommand(new CmdCreateLevel(_saveLoadService.GameState, _configsProvider.GameConfig, _gameFactory));
             _commandProcessor.RegisterCommand(new CmdResourceAdd(_saveLoadService.GameState));
             _commandProcessor.RegisterCommand(new CmdResourceSpend(_saveLoadService.GameState));
-            _commandProcessor.RegisterCommand(new CmdPlacePlant(_saveLoadService.GameState, _cellsService));
-            _commandProcessor.RegisterCommand(new CmdDeletePlant(_saveLoadService.GameState, _cellsService));
-            _commandProcessor.RegisterCommand(new CmdCreateCell(_saveLoadService.GameState));
-            _commandProcessor.RegisterCommand(new CmdCreateEnemy(_saveLoadService.GameState));
+            _commandProcessor.RegisterCommand(new CmdPlacePlant(_saveLoadService.GameState, _cellsService, _plantService, _entitiesFactory));
+            _commandProcessor.RegisterCommand(new CmdDeletePlant(_saveLoadService.GameState, _cellsService, _plantService));
+            _commandProcessor.RegisterCommand(new CmdCreateCell(_saveLoadService.GameState, _entitiesFactory));
+            _commandProcessor.RegisterCommand(new CmdCreateEnemy(_saveLoadService.GameState, _entitiesFactory, _enemiesService));
+            _commandProcessor.RegisterCommand(new CmdCreateBullet(_saveLoadService.GameState, _entitiesFactory));
         }
 
         public void Exit()

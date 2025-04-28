@@ -14,32 +14,33 @@ namespace MergePlants.State.Root
         public ObservableList<Level> Levels { get; } = new();
         public ObservableList<Resource> Resources { get; } = new();
 
+        public GameState GameState => _gameState;
+
         public GameStateProxy(GameState gameState)
         {
             _gameState = gameState;
 
-            InitLevel(gameState);
             InitResources(gameState);
 
             CurrentLevelId.Subscribe(newValue => gameState.CurrentLevelId = newValue);
         }
         public int CreateEntityId() =>
             _gameState.CreateEntityId();
-        private void InitLevel(GameState gameState)
+        public void InitLevel(Level level)
         {
-            gameState.Levels.ForEach(levelData => Levels.Add(new Level(levelData)));
+            _gameState.Levels.ForEach(levelData => Levels.Add(level));
 
             Levels.ObserveAdd().Subscribe(e =>
             {
                 var addedLevel = e.Value;
-                gameState.Levels.Add(addedLevel.Data);
+                _gameState.Levels.Add(addedLevel.Data);
             });
 
             Levels.ObserveRemove().Subscribe(e =>
             {
                 var removedLevel = e.Value;
-                var removedLevelState = gameState.Levels.FirstOrDefault(b => b.Id == removedLevel.Id);
-                gameState.Levels.Remove(removedLevelState);
+                var removedLevelState = _gameState.Levels.FirstOrDefault(b => b.Id == removedLevel.Id);
+                _gameState.Levels.Remove(removedLevelState);
             });
 
         }   

@@ -15,10 +15,16 @@ namespace MergePlants.Gameplay.Commands
     {
         private readonly GameStateProxy _gameState;
         private readonly CellsService _cellsService;
-        public CmdPlacePlant(GameStateProxy gameState, CellsService cellsService)
+        private readonly PlantsService _plantsService;
+        private readonly EntitiesFactory _entitiesFactory;
+
+        public CmdPlacePlant(GameStateProxy gameState, CellsService cellsService, 
+            PlantsService plantsService, EntitiesFactory entitiesFactory)
         {
             _gameState = gameState;
             _cellsService = cellsService;
+            _plantsService = plantsService;
+            _entitiesFactory = entitiesFactory;
         }
 
         public CommandResult<PlantEntity> Execute(CmdPlacePlantParameters parameters)
@@ -46,10 +52,11 @@ namespace MergePlants.Gameplay.Commands
                     Level = parameters.Level,
                     Type = EntityType.Plant,
                     Position = position,
+                    Config = _plantsService.GetConfigForLevel(parameters.Level)
 
                 };
 
-                PlantEntity newPlantEntity = new PlantEntity(newPlantData);
+                PlantEntity newPlantEntity = (PlantEntity)_entitiesFactory.CreateEntity(newPlantData);
 
                 currentLevel.Entities.Add(newPlantEntity);
 

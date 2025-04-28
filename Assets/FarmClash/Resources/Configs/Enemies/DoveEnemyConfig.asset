@@ -19,10 +19,10 @@ MonoBehaviour:
     <Health>k__BackingField: 0
     <Damage>k__BackingField: 0
     <AttackInterval>k__BackingField: 0
-    <MoveSpeed>k__BackingField: 0
+    <MoveSpeed>k__BackingField: 0.2
     <RewardCoins>k__BackingField: 0
     <RewardXP>k__BackingField: 0
     <Cost>k__BackingField: 0
   <VisualConfig>k__BackingField:
     <Sprite>k__BackingField: {fileID: -5033022965412808947, guid: 030ba6366af08274c9e2a6c8c7fd56f1, type: 3}
-    <AnimatorController>k__BackingField: {fileID: 0}
+    <AnimatorController>k__BackingField: {fileID: 9100000, guid: ba79638dfb935ea45bfec18984de4480, type: 2}

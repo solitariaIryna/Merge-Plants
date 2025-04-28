@@ -1,4 +1,5 @@
 ﻿using MergePlants.Services.AssetProvider;
+using MergePlants.State.Levels;
 using Zenject;
 
 namespace MergePlants.Infrastructure.Game.Factory
@@ -13,7 +14,12 @@ namespace MergePlants.Infrastructure.Game.Factory
             _assetProvider = assetProvider;
             _container = container;
         }
-
+        public Level CreateLevel(LevelData levelData)
+        {
+            Level level = _assetProvider.Instantiate<Level>($"Gameplay/Levels/Level_{levelData.Id + 1}", _container);
+            level.SetData(levelData);
+            return level;
+        }
 
     }
 }

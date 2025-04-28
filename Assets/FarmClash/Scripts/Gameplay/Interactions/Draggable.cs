@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace MergePlants.Gameplay.Interactions
 {
@@ -8,10 +9,13 @@ namespace MergePlants.Gameplay.Interactions
         [field: SerializeField] public bool CanInteract { get; private set; } = true;
         public Vector3 Position => transform.position;
 
-
         private bool _isHolded;
         private Vector3 _targetPosition;
-        public void SelectionStarted(Vector2 position)
+
+        public Action<Vector3> OnSelectionStarted;
+        public Action<Vector3> OnSelectionHolded;
+        public Action<Vector3> OnSelectionEnded;
+        public virtual void SelectionStarted(Vector2 position)
         {
             if (!CanInteract)
                 return;
@@ -19,19 +23,19 @@ namespace MergePlants.Gameplay.Interactions
             _targetPosition = new Vector3(position.x, position.y, transform.position.z);
             _isHolded = true;
 
-            OnSelectionStarted(position);
+            OnSelectionStarted?.Invoke(position);
 
         }
-        public void SelectionHolded(Vector2 position)
+        public virtual void SelectionHolded(Vector2 position)
         {
             if (!_isHolded)
                 return;
 
             _targetPosition = new Vector3(position.x, position.y, transform.position.z);
 
-            OnSelectionHolded(position);
+            OnSelectionHolded?.Invoke(position);
         }
-        public void SelectionEnded(Vector3 position)
+        public virtual void SelectionEnded(Vector3 position)
         {
             if (!_isHolded)
                 return;
@@ -39,7 +43,7 @@ namespace MergePlants.Gameplay.Interactions
             _targetPosition = new Vector3(position.x, position.y, transform.position.z);
             _isHolded = false;
 
-            OnSelectionEnded(position);
+            OnSelectionEnded?.Invoke(position);
         }
         private void Update()
         {
@@ -53,9 +57,6 @@ namespace MergePlants.Gameplay.Interactions
             Vector3 newPosition = Vector3.Lerp(transform.position, _targetPosition, _moveSpeed * Time.deltaTime);
             transform.position = newPosition;
         }
-        public virtual void OnSelectionStarted(Vector3 position) { }
-        public virtual void OnSelectionHolded(Vector2 position) { }
-        public virtual void OnSelectionEnded(Vector3 position) { }
         public virtual void OnUpdate() { }
 
     }

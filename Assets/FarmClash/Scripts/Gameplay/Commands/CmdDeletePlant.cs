@@ -12,10 +12,13 @@ namespace MergePlants.Gameplay.Commands
     {
         private readonly GameStateProxy _gameState;
         private readonly CellsService _cellsService;
-        public CmdDeletePlant(GameStateProxy gameState, CellsService cellsService)
+        private readonly PlantsService _plantsService;
+
+        public CmdDeletePlant(GameStateProxy gameState, CellsService cellsService, PlantsService plantsService)
         {
             _gameState = gameState;
             _cellsService = cellsService;
+            _plantsService = plantsService;
         }
         public bool Execute(CmdDeletePlantParameters parameters)
         {
@@ -26,8 +29,8 @@ namespace MergePlants.Gameplay.Commands
                 Debug.LogError($"Couldn't find Level for id: {_gameState.CurrentLevelId.CurrentValue}");
                 return false;
             }
-
-            _cellsService.FreeCell(parameters.Plant.CellId.Value);
+            parameters.Plant.Die()
+;            _cellsService.FreeCell(parameters.Plant.CellId.Value);
                        
             currentLevel.Entities.Remove(parameters.Plant);
 

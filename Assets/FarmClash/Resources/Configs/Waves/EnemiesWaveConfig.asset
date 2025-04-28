@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e97855a81ba8d4fbe462d786289c2c, type: 3}
   m_Name: EnemiesWaveConfig
   m_EditorClassIdentifier: 
-  <SpawnDelay>k__BackingField: 3
+  <SpawnDelay>k__BackingField: 5
   <EnemiesQueues>k__BackingField:
   - EnemyType: 0
     Count: 5

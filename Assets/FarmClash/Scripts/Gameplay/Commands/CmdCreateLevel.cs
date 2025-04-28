@@ -1,5 +1,6 @@
 ﻿using MergePlants.Configs;
 using MergePlants.Configs.Levels;
+using MergePlants.Infrastructure.Game.Factory;
 using MergePlants.Services.Command;
 using MergePlants.State.Levels;
 using MergePlants.State.Root;
@@ -12,11 +13,13 @@ namespace MergePlants.Gameplay.Commands.Parameters
     {
         private readonly GameStateProxy _gameState;
         private readonly GameConfig _gameConfig;
+        private readonly GameFactory _gameFactory;
 
-        public CmdCreateLevel(GameStateProxy gameState, GameConfig gameConfig)
+        public CmdCreateLevel(GameStateProxy gameState, GameConfig gameConfig, GameFactory gameFactory)
         {
             _gameState = gameState;
             _gameConfig = gameConfig;
+            _gameFactory = gameFactory;
         }
 
         public CommandResult<Level> Execute(CmdCreateLevelParameters parameters)
@@ -37,7 +40,7 @@ namespace MergePlants.Gameplay.Commands.Parameters
                 Id = parameters.LevelId,
             };
 
-            var newLevelStateProxy = new Level(newLevelState);
+            var newLevelStateProxy = _gameFactory.CreateLevel(newLevelState);
 
             _gameState.Levels.Add(newLevelStateProxy);
 

@@ -5,6 +5,7 @@ using MergePlants.Services.SlowMotion;
 using Zenject;
 using UnityEngine;
 using MergePlants.Gameplay.Services;
+using MergePlants.State.Entities;
 
 namespace MergePlants.Infrastructure.Installers
 {
@@ -13,6 +14,10 @@ namespace MergePlants.Infrastructure.Installers
         [SerializeField] private InputService _inputService;
         public override void InstallBindings()
         {
+            Container
+                .BindInterfacesAndSelfTo<EntitiesFactory>()
+                .AsSingle();
+
             Container
                 .BindInterfacesAndSelfTo<InputService>()
                 .AsSingle();
@@ -48,6 +53,10 @@ namespace MergePlants.Infrastructure.Installers
 
             Container
                 .BindInterfacesAndSelfTo<EnemiesService>()
+                .AsSingle();
+
+            Container
+                .BindInterfacesAndSelfTo<BulletService>()
                 .AsSingle();
 
             Container

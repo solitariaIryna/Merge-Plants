@@ -1,15 +1,16 @@
-﻿using R3;
+﻿using MergePlants.Gameplay.View.Plants;
 
 namespace MergePlants.State.Entities
 {
-    public abstract class MergableEntity : Entity
+    public abstract class MergableEntity : Entity, IMergable
     {
-        public readonly ReactiveProperty<int> Level;
+        public int Level { get; private set; }
 
-        public MergableEntity(MergableEntityData data) : base(data)
+        public void SetData(MergableEntityData data)
         {
-            Level = new ReactiveProperty<int>(data.Level);
-            Level.Subscribe(newValue => data.Level = newValue);
+            base.SetData(data);
+
+            Level = data.Level;
         }
     }
 }

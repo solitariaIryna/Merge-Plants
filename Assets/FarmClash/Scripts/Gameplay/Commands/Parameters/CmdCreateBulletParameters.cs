@@ -1,0 +1,17 @@
+﻿using MergePlants.Services.Command;
+using UnityEngine;
+
+namespace MergePlants.Gameplay.Commands.Parameters
+{
+    public class CmdCreateBulletParameters : ICommandParameter
+    {
+        public readonly Vector3 Position;
+        public readonly Transform Target;
+
+        public CmdCreateBulletParameters(Vector3 position, Transform target)
+        {
+            Position = position;
+            Target = target;
+        }
+    }
+}

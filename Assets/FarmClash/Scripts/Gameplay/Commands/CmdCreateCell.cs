@@ -12,9 +12,12 @@ namespace MergePlants.Gameplay.Commands
     public class CmdCreateCell : ICommandWithResult<CmdCreateCellParameters, CellEntity>
     {
         private readonly GameStateProxy _gameState;
-        public CmdCreateCell(GameStateProxy gameState)
+        private readonly EntitiesFactory _entitiesFactory;
+
+        public CmdCreateCell(GameStateProxy gameState, EntitiesFactory entitiesFactory)
         {
             _gameState = gameState;
+            _entitiesFactory = entitiesFactory;
         }
         public CommandResult<CellEntity> Execute(CmdCreateCellParameters parameters)
         {
@@ -38,7 +41,7 @@ namespace MergePlants.Gameplay.Commands
                 OccupiedByPlantId = -1
             };
 
-            CellEntity newCellEntity = new CellEntity(newCelldata);
+            CellEntity newCellEntity = (CellEntity)_entitiesFactory.CreateEntity(newCelldata);
 
             currentLevel.Cells.Add(newCellEntity);
 

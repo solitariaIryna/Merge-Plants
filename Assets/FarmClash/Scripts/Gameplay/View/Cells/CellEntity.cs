@@ -4,18 +4,22 @@ namespace MergePlants.State.Entities.Cells
 {
     public class CellEntity : Entity
     {
-        public readonly int CellId;
+        public int CellId { get; private set; }
 
         public ReactiveProperty<bool> Bought = new(false);
         public ReactiveProperty<int> OccupiedByPlant = new(-1);
-        public CellEntity(CellEntityData data) : base(data)
+        public void SetData(CellEntityData data)
         {
+            base.SetData(data);
+
             CellId = data.CellId;
             Bought.Value = data.Bought;
             Position = data.Position;
 
             Bought.Subscribe(b => data.Bought = b);
             OccupiedByPlant.Subscribe(o => data.OccupiedByPlantId = o);
+
+            transform.position = data.Position;
 
         }
     }
