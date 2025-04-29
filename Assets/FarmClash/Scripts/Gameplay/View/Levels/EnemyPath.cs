@@ -10,6 +10,8 @@ namespace MergePlants.Gameplay.View.Levels
         [SerializeField] private Transform[] _points;
 
         public Vector3 GetPoint(int index) => _points[index].position;
+
+        public int PointsCount => _points.Length;
         //[SerializeField] private SplineContainer _splineContainer;
 
         //public Vector3 EvaluatePosition(int splineIndex, float t) => 

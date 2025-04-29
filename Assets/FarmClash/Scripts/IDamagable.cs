@@ -1,12 +1,17 @@
-﻿
-using UnityEngine;
+﻿using System;
 
 namespace MergePlants.Gameplay.Core
 {
     public interface IDamagable
     {
-        Transform Transform { get; }
+        event Action<IDamagable, float> Damaged;
+        event Action<IDamagable, float> Healed;
+        event Action<IDamagable> Died;
+
+        float Health { get; }
+        float HealthNormalized { get; }
         bool IsAlive { get; }
-        void TakeDamage(float damage);
+        void ApplyDamage(float damage);
+        void ApplyHealling(float healAmount);
     }
 }

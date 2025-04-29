@@ -2,85 +2,64 @@
 using MergePlants.Gameplay.Core;
 using MergePlants.Gameplay.View.Enemies;
 using MergePlants.Gameplay.View.Levels;
-using R3;
+using MergePlants.State.Entities.Enemies;
+using MergePlants.State.Entities;
 using System;
 using UnityEngine;
+using MergePlants.Gameplay.Ememies;
 
-namespace MergePlants.State.Entities.Enemies
+namespace MergePlants.Gameplay.Enemies
 {
-    public class EnemyEntity : Entity, IDamagable
+    public class EnemyEntity : Entity, IDamagableTarget
     {
         [field: SerializeField] public EnemyVisual Visual { get; private set; }
         public EnemyType EnemyType { get; private set; }
 
-        private EnemyPath _path;
-
-        private EnemyConfig _config;
-        public float Velocity { get; private set; }
-
+        public bool IsAlive => !_isDead;
         public Transform Transform => transform;
+        public EnemyMover Mover => _mover;
+        public IDamagable Damagable => _health;
 
-        private EnemyEntityData _enemyData;
-        public bool IsAlive => !_isDied;
-
-        public Stat<float> Health => _enemyData.Health;
-
-
-        public Action Died;
         public Action Hit;
-        private int _index;
 
-        private bool _canMove = true;
-        private bool _isDied;
+        private EnemyEntityData _data;
+        private EnemyConfig _config;
+        private EnemyMover _mover;
+        private EntityHealth _health;
+        private bool _isDead;
+
+        public event Action<IDamagableTarget> Died;
+
         public void SetData(EnemyEntityData data)
         {
             base.SetData(data);
-            _enemyData = data;
+            _data = data;
+            _health = new EntityHealth(data.Config.Config.Health, data.Config.Config.Health);
             EnemyType = data.EnemyType;
             _config = data.Config.Config;
 
+            transform.position = data.Position;
             Visual.Construct(data.Config.VisualConfig);
 
-            transform.position = data.Position;
+            _health.Died += OnDied;
         }
-
-        public void SetPath(EnemyPath enemyPath)
+        public void SetPath(EnemyPath path)
         {
-            _path = enemyPath;
+            _mover = new EnemyMover(transform, path, _config.MoveSpeed);
         }
 
         private void Update()
         {
-            if (!_canMove)
-                return;
-
-            transform.position = Vector3.MoveTowards(transform.position, _path.GetPoint(_index), _config.MoveSpeed * Time.deltaTime);
-            Velocity = 1;
-
-            if (Vector3.Distance(transform.position, _path.GetPoint(_index)) < 0.1f)
-            {
-                _index++;
-            }
+            _mover?.Move();
         }
 
-        public void TakeDamage(float damage)
+        private void OnDied(IDamagable damagable)
         {
-            _enemyData.Health.Current.Value -= damage;
-            Hit?.Invoke();
+            if (_isDead) return;
 
-            if (_enemyData.Health.Current.Value <= 0)
-                Die();
-        }
-
-        private void Die()
-        {
-            if (_isDied)
-                return;
-
-            _isDied = true;
-            _canMove = false;
-            Died?.Invoke();
+            Died?.Invoke(this);
             Destroy(gameObject, 0.5f);
         }
     }
 }
+

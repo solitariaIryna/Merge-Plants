@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4435670991140001746}
   - component: {fileID: 4418568089340912484}
   - component: {fileID: 8034373603603325426}
-  - component: {fileID: 5040774833892365726}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -123,20 +122,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &5040774833892365726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 474052657729145264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24e8869284efb0340a650dd38356e3f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _progressBar: {fileID: 2688511428870111166}
-  _enemy: {fileID: 4435670991140001746}
 --- !u!1 &2452851092490424956
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,12 +343,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6246650342146419502, guid: 8fe94f44abeaf7048985b9ba01dd4ea1, type: 3}
       propertyPath: m_Name
-      value: HealthBar_canvas
+      value: HealthDisplay_canvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6246650342146419502, guid: 8fe94f44abeaf7048985b9ba01dd4ea1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4949586941974007466}
   m_SourcePrefab: {fileID: 100100000, guid: 8fe94f44abeaf7048985b9ba01dd4ea1, type: 3}
 --- !u!224 &253167764953606536 stripped
 RectTransform:
@@ -375,9 +363,28 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2045143191184893878, guid: 8fe94f44abeaf7048985b9ba01dd4ea1, type: 3}
   m_PrefabInstance: {fileID: 4120314288701380616}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 8043080802465395494}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b4ee2b8b743ade498b5a563ec0c9301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8043080802465395494 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6246650342146419502, guid: 8fe94f44abeaf7048985b9ba01dd4ea1, type: 3}
+  m_PrefabInstance: {fileID: 4120314288701380616}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4949586941974007466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8043080802465395494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e8869284efb0340a650dd38356e3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _progressBar: {fileID: 2688511428870111166}
+  _enemy: {fileID: 4435670991140001746}

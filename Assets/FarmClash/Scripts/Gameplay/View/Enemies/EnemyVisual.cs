@@ -1,7 +1,7 @@
 ﻿using MergePlants.Configs.Enemies;
 using MergePlants.Configs.Visual;
-using MergePlants.State.Entities.Enemies;
-using System;
+using MergePlants.Gameplay.Core;
+using MergePlants.Gameplay.Enemies;
 using UnityEngine;
 
 namespace MergePlants.Gameplay.View.Enemies
@@ -22,9 +22,9 @@ namespace MergePlants.Gameplay.View.Enemies
 
           
         }
-        private void OnEnable()
+        private void Start()
         {
-            _enemy.Died += PlayDieAnimation;
+            _enemy.Damagable.Died += PlayDieAnimation;
             _enemy.Hit += PlayHitAnimation;
         }
 
@@ -35,18 +35,18 @@ namespace MergePlants.Gameplay.View.Enemies
 
         private void OnDisable()
         {
-            _enemy.Died -= PlayDieAnimation;
+            _enemy.Damagable.Died -= PlayDieAnimation;
             _enemy.Hit -= PlayHitAnimation;
         }
 
-        private void PlayDieAnimation()
+        private void PlayDieAnimation(IDamagable damagable)
         {
             _animator.SetTrigger(_animationConfig.DieTrigger);
         }
 
         private void Update()
         {
-            _animator.SetFloat(_animationConfig.MoveSpeed, _enemy.Velocity);
+            _animator.SetFloat(_animationConfig.MoveSpeed, _enemy.Mover.Velocity.magnitude);
         }
     }
 }

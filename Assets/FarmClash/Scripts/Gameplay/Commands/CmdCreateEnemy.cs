@@ -5,6 +5,7 @@ using MergePlants.State.Entities.Enemies;
 using MergePlants.Gameplay.Commands.Parameters;
 using MergePlants.Gameplay.Services;
 using MergePlants.Configs.Enemies;
+using MergePlants.Gameplay.Enemies;
 
 namespace MergePlants.Gameplay.Commands
 {

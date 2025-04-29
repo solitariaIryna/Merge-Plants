@@ -1,4 +1,4 @@
-﻿using MergePlants.Gameplay.Core;
+﻿using MergePlants.Gameplay.Enemies;
 using MergePlants.State.Entities;
 using MergePlants.State.Entities.Bullets;
 using System.Collections;
@@ -25,9 +25,9 @@ namespace MergePlants.Gameplay.View.Bullets
         }
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent(out IDamagable damagableTarget))
+            if (other.TryGetComponent(out IDamagableTarget damagableTarget))
             {
-                damagableTarget.TakeDamage(_bulletData.Damage);
+                damagableTarget.Damagable.ApplyDamage(_bulletData.Damage);
                 Destroy(gameObject);
             }
         }

@@ -50,11 +50,11 @@ TagManager:
   - name: Plant
     uniqueID: 3817843619
     locked: 0
-  - name: WorldUI
-    uniqueID: 2055628571
-    locked: 0
   - name: Top
     uniqueID: 933589815
+    locked: 0
+  - name: WorldUI
+    uniqueID: 2055628571
     locked: 0
   m_RenderingLayers:
   - Default

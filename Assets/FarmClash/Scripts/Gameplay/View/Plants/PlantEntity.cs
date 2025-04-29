@@ -2,120 +2,95 @@
 using MergePlants.Gameplay.Interactions;
 using MergePlants.Gameplay.Services;
 using MergePlants.Gameplay.View.Plants;
+using MergePlants.State.Entities.Plants;
+using MergePlants.State.Entities;
 using R3;
-using System.Collections;
 using UnityEngine;
 using Zenject;
+using MergePlants.Gameplay.Enemies;
 
-namespace MergePlants.State.Entities.Plants
+namespace MergePlants.Gameplay.Plants
 {
     public class PlantEntity : MergableEntity
     {
         [field: SerializeField] public PlantVisual Visual { get; private set; }
-        [SerializeField] private Transform _attackPoint;
         [SerializeField] private ReturningDraggable _draggable;
+        [SerializeField] private Transform _attackPoint;
         [SerializeField] private TriggerObserver _attackObserver;
 
-        public ReactiveProperty<int> CellId = new();
+        public ReactiveProperty<int> CellId { get; } = new();
 
+        private PlantAttacker _attacker;
         private PlantsService _plantsService;
-        private BulletService _bulletService;
-
-        private PlantEntityData _plantData;
-        private IDamagable _attackTarget;
-
-        private Coroutine _attackingCoroutine;
+        private PlantEntityData _data;
 
         [Inject]
         private void Construct(PlantsService plantsService, BulletService bulletService)
         {
             _plantsService = plantsService;
-            _bulletService = bulletService;
-
+            _attacker = new PlantAttacker(bulletService, _attackPoint);
         }
-        public void SetData(PlantEntityData data) 
+
+        public void SetData(PlantEntityData data)
         {
             base.SetData(data);
-            _plantData = data;
+            _data = data;
+
             CellId.Value = data.CellId;
-
-            CellId.Subscribe(c => data.CellId = c);
+            CellId.Subscribe(id => data.CellId = id);
             transform.position = data.Position;
-
             Visual.Construct(data.Config.VisualConfig);
+            _attacker.SetConfig(data.Config.Config);
         }
+
         private void OnEnable()
         {
             _draggable.OnSelectionEnded += OnSelectionEnded;
-            _attackObserver.TriggerEntered += StartAttack;
-            _attackObserver.TriggerExited += StopAttack; 
+            _attackObserver.TriggerEntered += TriggerEntered;
+            _attackObserver.TriggerExited += TriggerExited;
         }
 
-        private void StopAttack(Collider2D collider)
-        {
-            if (collider.transform == _attackTarget.Transform)
-                _attackTarget = null;
-            
-        }
-
-        private void StartAttack(Collider2D collider)
-        {
-            if (collider.TryGetComponent<IDamagable>(out IDamagable damagableTarget))
-            {
-                _attackTarget = damagableTarget;
-
-                if (_attackingCoroutine == null)
-                {
-                    StartCoroutine(Attacking());
-                }
-            }
-        }
-        private IEnumerator Attacking()
-        {
-            while (_attackTarget != null && _attackTarget.IsAlive)
-            {
-                _bulletService.CreateBullet(_attackPoint.position, _attackTarget.Transform, _plantData.Config.Config.BulletSpeed, _plantData.Config.Config.Damage);
-                yield return new WaitForSeconds(_plantData.Config.Config.AttackSpeed);
-            }
-        }
         private void OnDisable()
         {
             _draggable.OnSelectionEnded -= OnSelectionEnded;
-            _attackObserver.TriggerEntered -= StartAttack;
-            _attackObserver.TriggerExited -= StopAttack;
+            _attackObserver.TriggerEntered -= TriggerEntered;
+            _attackObserver.TriggerExited -= TriggerExited;
         }
 
-        public void OnSelectionEnded(Vector3 position)
+        private void TriggerEntered(Collider2D collider)
         {
-            RaycastHit2D[] hits = Physics2D.RaycastAll(position, Vector2.zero, 1);
-
-            bool hasMerge = false;
-
-            if (hits.Length > 0)
-            {
-                foreach (RaycastHit2D hit in hits)
-                {
-                    if (hit.collider.gameObject == gameObject)
-                        continue;
-
-                    if (hit.collider.TryGetComponent<IMergable>(out IMergable mergable))
-                    {
-                        hasMerge = TryRequestMerge(mergable);
-                        break;
-                    }
-                }            
-            }
-            
-            if (!hasMerge)
-                _draggable.Return();
+            if (collider.TryGetComponent<IDamagableTarget>(out var target))
+                _attacker.StartAttacking(target);
         }
-        public bool TryRequestMerge(IMergable other)
+
+        private void TriggerExited(Collider2D collider)
+        {
+            if (collider.TryGetComponent<IDamagableTarget>(out var target))
+                _attacker.StopAttacking(target);
+        }
+
+        private void OnSelectionEnded(Vector3 position)
+        {
+            foreach (var hit in Physics2D.RaycastAll(position, Vector2.zero, 1))
+            {
+                if (hit.collider.gameObject == gameObject) continue;
+                if (hit.collider.TryGetComponent<IMergable>(out var mergable))
+                {
+                    if (TryRequestMerge(mergable)) return;
+                }
+            }
+
+            _draggable.Return();
+        }
+
+        private bool TryRequestMerge(IMergable other)
         {
             if (other.Type == Type && other.Level == Level)
             {
                 _plantsService.TryMergePlants(UniqueId, other.UniqueId);
                 return true;
             }
+
             return false;
         }
 
@@ -124,4 +99,5 @@ namespace MergePlants.State.Entities.Plants
             Destroy(gameObject);
         }
     }
+
 }

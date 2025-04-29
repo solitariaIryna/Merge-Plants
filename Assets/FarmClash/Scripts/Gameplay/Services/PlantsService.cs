@@ -1,5 +1,4 @@
 ﻿using MergePlants.Services.Command;
-using MergePlants.State.Entities.Plants;
 using MergePlants.Gameplay.Commands.Parameters;
 using ObservableCollections;
 using System.Collections.Generic;
@@ -8,6 +7,7 @@ using MergePlants.State.Entities;
 using MergePlants.Configs.Plants;
 using MergePlants.Services.ConfigsProvider;
 using System.Linq;
+using MergePlants.Gameplay.Plants;
 
 namespace MergePlants.Gameplay.Services
 {

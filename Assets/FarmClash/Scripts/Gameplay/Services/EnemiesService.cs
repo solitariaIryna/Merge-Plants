@@ -2,13 +2,12 @@
 using MergePlants.Gameplay.Commands.Parameters;
 using MergePlants.Services.Command;
 using MergePlants.Services.ConfigsProvider;
-using MergePlants.State.Entities.Enemies;
 using ObservableCollections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using MergePlants.Gameplay.View.Levels;
-using System;
+using MergePlants.Gameplay.Enemies;
 
 namespace MergePlants.Gameplay.Services
 {

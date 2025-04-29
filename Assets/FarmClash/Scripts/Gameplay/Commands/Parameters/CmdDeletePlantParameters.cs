@@ -1,5 +1,5 @@
-﻿using MergePlants.Services.Command;
-using MergePlants.State.Entities.Plants;
+﻿using MergePlants.Gameplay.Plants;
+using MergePlants.Services.Command;
 
 namespace MergePlants.Gameplay.Commands.Parameters
 {
