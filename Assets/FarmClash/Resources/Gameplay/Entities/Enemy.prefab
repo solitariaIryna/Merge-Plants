@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 1340130672868501602}
   - component: {fileID: 5490809561756794219}
   - component: {fileID: 3123886325978515134}
+  - component: {fileID: 8387814816592810696}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -172,6 +173,7 @@ MonoBehaviour:
   _animationConfig: {fileID: 11400000, guid: acb1aa618293cbc44a2519eafd714e2e, type: 2}
   _renderer: {fileID: 3123886325978515134}
   _animator: {fileID: 5490809561756794219}
+  _hitGraph: {fileID: 8387814816592810696}
 --- !u!95 &5490809561756794219
 Animator:
   serializedVersion: 7
@@ -249,6 +251,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8387814816592810696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2452851092490424956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06834ce7a57545f4aaa1de158a775011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _graphAsset: {fileID: 11400000, guid: 6aea7621ca1cf6645a1d6d406f52eb62, type: 2}
+  Targets:
+  - Id: 0
+    Target: {fileID: 2452851092490424956}
 --- !u!1001 &4120314288701380616
 PrefabInstance:
   m_ObjectHideFlags: 0

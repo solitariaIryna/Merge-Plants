@@ -1,0 +1,3 @@
+[submodule "Assets/TweenGraph"]
+	path = Assets/TweenGraph
+	url = https://github.com/solitariaIryna/TweenSequenceGraph.git
