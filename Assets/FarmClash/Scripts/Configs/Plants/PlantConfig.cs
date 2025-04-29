@@ -12,6 +12,7 @@ namespace MergePlants.Configs.Plants
         [Header("Combat")]
         [field: SerializeField] public float Damage { get; private set; }
         [field: SerializeField] public float AttackSpeed { get; private set; }
+        [field: SerializeField] public float BulletSpeed { get; private set; }
         [field: SerializeField] public float Range { get; private set; }
         [field: SerializeField] public DamageType DamageType { get; private set; }
 

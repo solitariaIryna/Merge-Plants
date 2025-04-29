@@ -26,7 +26,9 @@ namespace MergePlants.Gameplay.Commands
                 UniqueId = entityId,
                 Type = EntityType.Bullet,
                 Position = parameters.Position,
-                Target = parameters.Target
+                Target = parameters.Target,
+                Speed = parameters.Speed,
+                Damage = parameters.Damage,
 
             };
 

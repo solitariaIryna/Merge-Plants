@@ -4,6 +4,7 @@ using MergePlants.State.Entities;
 using MergePlants.State.Entities.Enemies;
 using MergePlants.Gameplay.Commands.Parameters;
 using MergePlants.Gameplay.Services;
+using MergePlants.Configs.Enemies;
 
 namespace MergePlants.Gameplay.Commands
 {
@@ -23,13 +24,16 @@ namespace MergePlants.Gameplay.Commands
         {
             int entityId = _gameState.CreateEntityId();
 
+            EnemyAvatarConfig config = _enemiesService.GetConfigForType(parameters.EnemyType);
+
             EnemyEntityData newEnemyData = new EnemyEntityData
             {
                 UniqueId = entityId,
                 Type = EntityType.Enemy,
                 EnemyType = parameters.EnemyType,
                 Position = parameters.Position,
-                Config = _enemiesService.GetConfigForType(parameters.EnemyType)
+                Config = config,
+                Health = new(config.Config.Health, config.Config.Health)
 
             };
 

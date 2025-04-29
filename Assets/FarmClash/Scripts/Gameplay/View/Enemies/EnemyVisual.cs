@@ -1,6 +1,7 @@
 ﻿using MergePlants.Configs.Enemies;
 using MergePlants.Configs.Visual;
 using MergePlants.State.Entities.Enemies;
+using System;
 using UnityEngine;
 
 namespace MergePlants.Gameplay.View.Enemies
@@ -19,7 +20,28 @@ namespace MergePlants.Gameplay.View.Enemies
             _renderer.sprite = _visualConfig.Sprite;
             _animator.runtimeAnimatorController = _visualConfig.AnimatorController;
 
-            
+          
+        }
+        private void OnEnable()
+        {
+            _enemy.Died += PlayDieAnimation;
+            _enemy.Hit += PlayHitAnimation;
+        }
+
+        private void PlayHitAnimation()
+        {
+            _animator.SetTrigger(_animationConfig.HitTrigger);
+        }
+
+        private void OnDisable()
+        {
+            _enemy.Died -= PlayDieAnimation;
+            _enemy.Hit -= PlayHitAnimation;
+        }
+
+        private void PlayDieAnimation()
+        {
+            _animator.SetTrigger(_animationConfig.DieTrigger);
         }
 
         private void Update()

@@ -74,8 +74,8 @@ namespace MergePlants.State.Entities.Plants
         {
             while (_attackTarget != null && _attackTarget.IsAlive)
             {
+                _bulletService.CreateBullet(_attackPoint.position, _attackTarget.Transform, _plantData.Config.Config.BulletSpeed, _plantData.Config.Config.Damage);
                 yield return new WaitForSeconds(_plantData.Config.Config.AttackSpeed);
-                _bulletService.CreateBullet(_attackPoint.position, _attackTarget.Transform);
             }
         }
         private void OnDisable()

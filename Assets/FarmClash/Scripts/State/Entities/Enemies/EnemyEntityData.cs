@@ -7,5 +7,7 @@ namespace MergePlants.State.Entities.Enemies
         public EnemyType EnemyType { get; set; }
 
         public EnemyAvatarConfig Config { get; set; }
+
+        public Stat<float> Health = new(0, 0);
     }
 }

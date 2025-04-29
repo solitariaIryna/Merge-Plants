@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d58aa7989ad71014cbe1456cb731c668, type: 3}
   m_Name: AnimationConfig
   m_EditorClassIdentifier: 
-  _deadStateTrigger: Dead
+  _deadStateTrigger: Die
   _moveSpeed: MoveSpeed

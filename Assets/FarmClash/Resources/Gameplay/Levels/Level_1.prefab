@@ -760,6 +760,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level_1
       objectReference: {fileID: 0}
+    - target: {fileID: 8031996913797520493, guid: bc9a499815b1fcf46895b8f160b0ada4, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031996913797520493, guid: bc9a499815b1fcf46895b8f160b0ada4, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031996913797520493, guid: bc9a499815b1fcf46895b8f160b0ada4, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 291362045
+      objectReference: {fileID: 0}
+    - target: {fileID: 8811830169743307662, guid: bc9a499815b1fcf46895b8f160b0ada4, type: 3}
+      propertyPath: m_SortingLayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8811830169743307662, guid: bc9a499815b1fcf46895b8f160b0ada4, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 933589815
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

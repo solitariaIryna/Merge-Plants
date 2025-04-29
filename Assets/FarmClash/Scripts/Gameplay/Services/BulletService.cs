@@ -14,9 +14,9 @@ namespace MergePlants.Gameplay.Services
             _cmd = cmd;
         }
 
-        public bool CreateBullet(Vector3 position, Transform target)
+        public bool CreateBullet(Vector3 position, Transform target, float speed, float damage)
         {
-            var parameters = new CmdCreateBulletParameters(position, target);
+            var parameters = new CmdCreateBulletParameters(position, target, speed, damage);
             CommandResult<BulletEntity> result = _cmd.Process<CmdCreateBulletParameters, BulletEntity>(parameters);
 
             if (result.Success)

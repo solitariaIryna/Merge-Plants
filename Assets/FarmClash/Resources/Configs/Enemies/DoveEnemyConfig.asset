@@ -16,7 +16,7 @@ MonoBehaviour:
     <ConfigId>k__BackingField: 1
     <DisplayName>k__BackingField: Dove
     <Type>k__BackingField: 0
-    <Health>k__BackingField: 0
+    <Health>k__BackingField: 10
     <Damage>k__BackingField: 0
     <AttackInterval>k__BackingField: 0
     <MoveSpeed>k__BackingField: 0.2
